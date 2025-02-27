@@ -16,7 +16,7 @@ st.title("Slab Measurements Entry")
 
 # Section 1: User details
 st.header("Section 1: User Details")
-buyer_name = st.text_input("Buyer Name")
+supplier_name = st.text_input("Supplier Name")
 batch_no = st.text_input("Batch Number", st.session_state.batch_no)
 color = st.text_input("Color")
 marker = st.text_input("Marker")
@@ -24,7 +24,7 @@ date = st.date_input("Date", value=datetime.today())
 
 # Button to proceed to Section 2
 if st.button("Enter Measurement"):
-    if buyer_name and batch_no and color and marker:
+    if supplier_name and batch_no and color and marker:
         st.session_state.show_section2 = True
         st.session_state.batch_no = batch_no
         st.success("Proceed to enter measurements.")
@@ -79,14 +79,14 @@ if st.session_state.show_section2:
             with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
                 # Write Section 1 details to the first sheet
                 section1_data = {
-                    "Buyer Name": [buyer_name],
+                    "Supplier Name": [supplier_name],
                     "Batch Number": [batch_no],
                     "Color": [color],
                     "Marker": [marker],
                     "Date": [date]
                 }
                 section1_df = pd.DataFrame(section1_data)
-                section1_df.to_excel(writer, sheet_name="Buyer details", index=False)
+                section1_df.to_excel(writer, sheet_name="Supplier details", index=False)
 
                 # Write slab measurements to the second sheet
                 st.session_state.df.to_excel(writer, sheet_name="Slab Measurements", index=False)
@@ -101,14 +101,15 @@ if st.session_state.show_section2:
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
 
-             # Clear all fields and reset session state for the next set of entries
-            st.session_state.df = pd.DataFrame(columns=["Slab Number", "Length", "Width", "Sq.ft", "Grade"])
-            st.session_state.batch_no = ""
-            st.session_state.show_section2 = False
-            st.success("All fields cleared. Ready for the next set of entries.")
-
-            # Rerun the app to clear all input fields
-            #st.rerun()
+            # # Set submitted state to True to show the Clear button
+            # st.session_state.submitted = True
 
         else:
             st.error("Please ensure all records are entered and Batch Number is provided.")
+    
+# if st.session_state.submitted:
+#     if st.button("Clear", key="clear_button"):
+#         # Reset all session state variables
+#         st.rerun()
+#         st.session_state.submitted = False
+#         st.success("All fields have been cleared.")
