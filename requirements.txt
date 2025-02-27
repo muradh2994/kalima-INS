@@ -1,5 +1,5 @@
-streamlit==1.26.0
-pandas==2.0.3
-openpyxl==3.1.2
-xlsxwriter==3.1.9
-pillow==9.4.0
+streamlit
+pandas
+openpyxl
+xlsxwriter
+pillow
