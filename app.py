@@ -35,7 +35,7 @@ if st.button("Enter Measurement"):
 if st.session_state.show_section2:
     st.header("Section 2: Slab Measurements Entry")
     measurement_unit = st.selectbox("Measurement Unit", ["inches (in)", "centimeters (cm)"])
-    slab_number = st.text_input("Slab Number")
+    slab_number = st.number_input("Slab Number",min_value=0)
     length = st.number_input("Length ", min_value=0)
     width = st.number_input("Width ", min_value=0)
     grade = st.text_input("Grade")
@@ -60,7 +60,7 @@ if st.session_state.show_section2:
             st.success("Record added successfully!")
             
             # Clear the input fields for the next record
-            slab_number = ""
+            slab_number = 0
             length = 0
             width = 0
             grade = ""
@@ -106,10 +106,3 @@ if st.session_state.show_section2:
 
         else:
             st.error("Please ensure all records are entered and Batch Number is provided.")
-    
-# if st.session_state.submitted:
-#     if st.button("Clear", key="clear_button"):
-#         # Reset all session state variables
-#         st.rerun()
-#         st.session_state.submitted = False
-#         st.success("All fields have been cleared.")
