@@ -12,7 +12,8 @@ import urllib.parse as urlparse
 
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning, message="pandas only supports SQLAlchemy connectable.*")
-
+# Ignore all warnings related to bcrypt
+warnings.simplefilter("ignore", category=UserWarning)
 #load_dotenv()
 
 # Database connection
