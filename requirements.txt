@@ -3,3 +3,6 @@ pandas
 openpyxl
 xlsxwriter
 pillow
+psycopg2
+passlib
+urllib
