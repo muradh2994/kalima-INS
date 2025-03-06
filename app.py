@@ -6,7 +6,6 @@ from io import BytesIO
 from datetime import datetime
 import psycopg2
 from passlib.hash import bcrypt
-from dotenv import load_dotenv
 import os
 import urllib.parse as urlparse
 
